@@ -1,0 +1,7 @@
+{
+  "description": "Project configuration file placeholder to prevent build errors.",
+  "setting": {
+    "urlCheck": false
+  },
+  "compileType": "miniprogram"
+}
