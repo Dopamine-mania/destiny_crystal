@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+
+import React, { useState, useContext, useMemo } from 'react';
 import type { BaziReport, Crystal } from '../types';
 import { FiveElement } from '../types';
 import { ShoppingCartIcon, StarIcon, ChatBubbleBottomCenterTextIcon, CheckIcon } from '@heroicons/react/24/solid';
@@ -92,24 +93,78 @@ const CrystalCard: React.FC<{ crystal: Crystal }> = ({ crystal }) => {
     );
 };
 
+type SortType = 'default' | 'price_asc' | 'price_desc' | 'rating' | 'reviews';
+
+const SortButton: React.FC<{ label: string; value: SortType; activeSort: SortType; setSort: (value: SortType) => void; }> = ({ label, value, activeSort, setSort }) => {
+    const isActive = activeSort === value;
+    return (
+        <button
+            onClick={() => setSort(value)}
+            className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
+                isActive
+                    ? 'bg-brand-secondary text-brand-dark'
+                    : 'bg-brand-dark/50 text-brand-text-muted hover:bg-slate-700'
+            }`}
+        >
+            {label}
+        </button>
+    );
+};
+
 
 const CrystalRecommendations: React.FC<Props> = ({ data, isPaid }) => {
+  const [sortBy, setSortBy] = useState<SortType>('default');
+
+  const recommendedCrystals = useMemo(() => 
+    allCrystals.filter(crystal => data.favorable.includes(crystal.element)),
+    [data.favorable]
+  );
+
+  const sortedCrystals = useMemo(() => {
+    const crystals = [...recommendedCrystals];
+    switch (sortBy) {
+        case 'price_asc':
+            crystals.sort((a, b) => a.price - b.price);
+            break;
+        case 'price_desc':
+            crystals.sort((a, b) => b.price - a.price);
+            break;
+        case 'rating':
+            crystals.sort((a, b) => b.rating - a.rating);
+            break;
+        case 'reviews':
+            crystals.sort((a, b) => b.reviews - a.reviews);
+            break;
+        default:
+            // Default case, no sorting needed.
+            break;
+    }
+    return crystals;
+  }, [sortBy, recommendedCrystals]);
+
   if (!isPaid) {
     return null; // Don't render anything if the user hasn't paid
   }
 
-  const recommendedCrystals = allCrystals.filter(crystal => data.favorable.includes(crystal.element));
 
   return (
     <div className="bg-brand-surface p-6 rounded-lg shadow-lg">
       <h2 className="text-xl font-bold mb-2 text-center">专属补运水晶</h2>
-      <p className="text-sm text-brand-text-muted text-center mb-6 flex items-center justify-center gap-2">
+      <p className="text-sm text-brand-text-muted text-center mb-4 flex items-center justify-center gap-2">
         <ChatBubbleBottomCenterTextIcon className="w-5 h-5 text-brand-secondary"/>
         根据您的喜用神「<span className="font-bold text-brand-secondary">{data.favorable.join(' ')}</span>」，为您精选以下水晶
       </p>
 
+      <div className="flex flex-wrap gap-2 mb-6 justify-center border-t border-b border-slate-700 py-3">
+        <SortButton label="推荐" value="default" activeSort={sortBy} setSort={setSortBy} />
+        <SortButton label="价格 ↑" value="price_asc" activeSort={sortBy} setSort={setSortBy} />
+        <SortButton label="价格 ↓" value="price_desc" activeSort={sortBy} setSort={setSortBy} />
+        <SortButton label="评价" value="rating" activeSort={sortBy} setSort={setSortBy} />
+        <SortButton label="销量" value="reviews" activeSort={sortBy} setSort={setSortBy} />
+      </div>
+
       <div className="space-y-4">
-        {recommendedCrystals.map(crystal => (
+        {sortedCrystals.map(crystal => (
           <CrystalCard key={crystal.name} crystal={crystal} />
         ))}
       </div>

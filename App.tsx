@@ -1,9 +1,11 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import BirthInfoInput from './pages/BirthInfoInput';
 import AnalysisReport from './pages/AnalysisReport';
-import { AppContext, AppProvider } from './contexts/AppContext';
+import Cart from './pages/Cart';
+import Payment from './pages/Payment';
+import Confirmation from './pages/Confirmation';
+import { AppProvider } from './contexts/AppContext';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +16,9 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<BirthInfoInput />} />
               <Route path="/report" element={<AnalysisReport />} />
-              {/* Add other routes for e-commerce flow here if needed */}
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<Payment />} />
+              <Route path="/confirmation" element={<Confirmation />} />
             </Routes>
           </HashRouter>
         </div>

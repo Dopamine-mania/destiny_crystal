@@ -1,3 +1,4 @@
+
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
@@ -14,18 +15,20 @@ const AnalysisReport: React.FC = () => {
   const context = useContext(AppContext);
   const navigate = useNavigate();
 
+  const baziReport = context?.baziReport;
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  if (!context || !context.baziReport) {
-    useEffect(() => {
+    if (!baziReport) {
       navigate('/');
-    }, [navigate]);
+    }
+  }, [baziReport, navigate]);
+
+  if (!context || !baziReport) {
     return <div className="min-h-screen flex items-center justify-center bg-brand-dark text-brand-text">Loading report data...</div>;
   }
 
-  const { baziReport, isPaid, cart } = context;
+  const { isPaid, cart } = context;
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
 
@@ -38,7 +41,7 @@ const AnalysisReport: React.FC = () => {
             <h1 className="text-xl font-bold text-center flex-grow">我的命理报告</h1>
             <div className="w-8 flex justify-end">
                 {isPaid && (
-                    <button className="p-2 rounded-full hover:bg-brand-surface relative">
+                    <button onClick={() => navigate('/cart')} className="p-2 rounded-full hover:bg-brand-surface relative">
                         <ShoppingCartIcon className="w-6 h-6 text-brand-text" />
                         {cartItemCount > 0 && (
                             <span className="absolute -top-1 -right-1 block h-5 w-5 rounded-full bg-red-600 text-white text-xs flex items-center justify-center border-2 border-brand-dark">

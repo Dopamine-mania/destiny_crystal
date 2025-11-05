@@ -10,6 +10,9 @@ interface AppContextType {
   setIsPaid: React.Dispatch<React.SetStateAction<boolean>>;
   cart: CartItem[];
   addToCart: (crystal: Crystal) => void;
+  removeFromCart: (crystalName: string) => void;
+  updateQuantity: (crystalName: string, quantity: number) => void;
+  clearCart: () => void;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -38,8 +41,29 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     console.log(`Added ${crystal.name} to cart.`);
   };
 
+  const removeFromCart = (crystalName: string) => {
+    setCart(prevCart => prevCart.filter(item => item.crystal.name !== crystalName));
+  };
+
+  const updateQuantity = (crystalName: string, quantity: number) => {
+    setCart(prevCart =>
+      prevCart
+        .map(item =>
+          item.crystal.name === crystalName
+            ? { ...item, quantity }
+            : item
+        )
+        .filter(item => item.quantity > 0) // Remove if quantity is 0 or less
+    );
+  };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+
   return (
-    <AppContext.Provider value={{ userInfo, setUserInfo, baziReport, setBaziReport, isPaid, setIsPaid, cart, addToCart }}>
+    <AppContext.Provider value={{ userInfo, setUserInfo, baziReport, setBaziReport, isPaid, setIsPaid, cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
       {children}
     </AppContext.Provider>
   );
