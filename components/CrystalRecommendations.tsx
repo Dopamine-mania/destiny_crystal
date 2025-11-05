@@ -1,4 +1,3 @@
-
 import React, { useState, useContext, useMemo } from 'react';
 import type { BaziReport, Crystal } from '../types';
 import { FiveElement } from '../types';
@@ -65,7 +64,7 @@ const CrystalCard: React.FC<{ crystal: Crystal }> = ({ crystal }) => {
                     </div>
                     <div className="flex items-center gap-2">
                         <button 
-                          onClick={() => alert(`Viewing details for ${crystal.name}`)} 
+                          onClick={() => alert(`查看 ${crystal.name} 详情`)} 
                           className="text-brand-text-muted text-sm py-1 px-3 rounded-full hover:bg-slate-700 transition-colors border border-slate-600"
                         >
                             详情
@@ -103,7 +102,7 @@ const SortButton: React.FC<{ label: string; value: SortType; activeSort: SortTyp
             className={`px-3 py-1 text-xs font-medium rounded-full transition-colors ${
                 isActive
                     ? 'bg-brand-secondary text-brand-dark'
-                    : 'bg-brand-dark/50 text-brand-text-muted hover:bg-slate-700'
+                    : 'bg-brand-text-muted hover:bg-slate-700'
             }`}
         >
             {label}
