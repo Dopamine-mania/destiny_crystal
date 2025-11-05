@@ -1,0 +1,102 @@
+<view class="container">
+  <view class="header">
+    <view class="title">
+      <text class="icon">🛒</text>
+      <text class="title-text">购物车</text>
+    </view>
+  </view>
+
+  <view wx:if="{{cartItems.length === 0}}" class="empty-cart">
+    <text class="empty-icon">🛒</text>
+    <text class="empty-text">购物车是空的</text>
+    <button class="back-btn" bindtap="onBack">返回</button>
+  </view>
+
+  <view wx:else class="cart-content">
+    <!-- 全选区域 -->
+    <view class="select-all-section">
+      <view class="select-all" bindtap="onSelectAll">
+        <text class="checkbox {{selectAll ? 'checked' : ''}}">{{selectAll ? '✓' : '○'}}</text>
+        <text class="select-text">全选</text>
+      </view>
+      <text class="item-count">共{{cartItems.length}}件商品</text>
+    </view>
+
+    <view class="cart-items">
+      <view wx:for="{{cartItems}}" wx:key="id" class="cart-item">
+        <!-- 商品选择框 -->
+        <view class="item-select" bindtap="onItemSelect" data-index="{{index}}">
+          <text class="checkbox {{selectedItems[index] ? 'checked' : ''}}">{{selectedItems[index] ? '✓' : '○'}}</text>
+        </view>
+        
+        <!-- 商品图片 -->
+        <view class="item-image">
+          <text class="item-emoji">💎</text>
+          <view wx:if="{{item.element}}" class="item-element element-{{item.element}}">{{item.element}}</view>
+        </view>
+        
+        <!-- 商品信息 -->
+        <view class="item-info">
+          <view class="item-name">{{item.name}}</view>
+          <view wx:if="{{item.element}}" class="item-desc">{{item.element}}元素水晶</view>
+          <view class="item-price">¥{{item.price}}</view>
+        </view>
+        
+        <!-- 操作区域 -->
+        <view class="item-actions">
+          <view class="quantity-controls">
+            <button 
+              class="qty-btn" 
+              bindtap="onQuantityChange"
+              data-index="{{index}}"
+              data-type="decrease"
+            >-</button>
+            <text class="quantity">{{item.quantity}}</text>
+            <button 
+              class="qty-btn"
+              bindtap="onQuantityChange" 
+              data-index="{{index}}"
+              data-type="increase"
+            >+</button>
+          </view>
+          <button 
+            class="remove-btn"
+            bindtap="onRemoveItem"
+            data-index="{{index}}"
+          >移除</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 协议确认 -->
+    <view class="agreement-section">
+      <view class="agreement-check" bindtap="onAgreeAgreement">
+        <text class="checkbox {{agreeAgreement ? 'checked' : ''}}">{{agreeAgreement ? '✓' : '○'}}</text>
+        <text class="agreement-text">我已阅读并同意</text>
+        <text class="agreement-link" bindtap="onViewAgreement" catchtap="true">《购买协议》</text>
+      </view>
+    </view>
+
+    <!-- 结算区域 -->
+    <view class="total-section">
+      <view class="total-info">
+        <view class="selected-count">
+          <text class="count-text">已选({{selectedCount}})</text>
+        </view>
+        <view class="total-amount">
+          <text class="total-label">合计:</text>
+          <text class="total-value">¥{{totalAmount}}</text>
+        </view>
+      </view>
+      <view class="checkout-actions">
+        <button class="action-btn secondary" bindtap="onBack">继续购物</button>
+        <button 
+          class="action-btn primary {{canCheckout ? '' : 'disabled'}}" 
+          bindtap="onCheckout"
+        >
+          立即结算
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,389 @@
+.container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding: 32rpx;
+}
+
+/* 用户头部 */
+.user-header {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  border: 2rpx solid #374151;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 24rpx;
+}
+
+.avatar-icon {
+  font-size: 64rpx;
+  color: white;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+  margin-bottom: 8rpx;
+}
+
+.user-level {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.user-level.premium {
+  color: #f59e0b;
+}
+
+.user-level.normal {
+  color: #9ca3af;
+}
+
+/* 会员到期信息 */
+.expire-info {
+  margin-top: 8rpx;
+}
+
+.expire-text {
+  font-size: 20rpx;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.1);
+  padding: 4rpx 8rpx;
+  border-radius: 4rpx;
+}
+
+.level-icon {
+  font-size: 24rpx;
+}
+
+.level-text {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.member-badge {
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  border: 2rpx solid #9ca3af;
+  color: #9ca3af;
+}
+
+.member-badge.active {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border-color: transparent;
+  color: white;
+}
+
+/* 统计区域 */
+.stats-section {
+  display: flex;
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  border: 2rpx solid #374151;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx solid #374151;
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-number {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+/* 菜单区域 */
+.menu-section {
+  margin-bottom: 32rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+  margin-bottom: 24rpx;
+}
+
+.menu-grid {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  border: 2rpx solid #374151;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #374151;
+  transition: background 0.3s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.menu-item.highlight {
+  background: rgba(245, 158, 11, 0.05);
+  border-left: 4rpx solid #f59e0b;
+}
+
+.menu-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 24rpx;
+}
+
+.menu-content {
+  flex: 1;
+}
+
+.menu-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #e5e5e5;
+  margin-bottom: 8rpx;
+}
+
+.menu-desc {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+.menu-extra {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.count-badge {
+  background: #ef4444;
+  color: white;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.arrow {
+  color: #9ca3af;
+  font-size: 24rpx;
+  transition: transform 0.3s ease;
+}
+
+/* 订单子菜单 */
+.sub-menu {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #374151;
+  background: rgba(55, 65, 81, 0.3);
+  border-radius: 8rpx;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sub-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 24rpx;
+  margin-bottom: 8rpx;
+  border-radius: 6rpx;
+  transition: background 0.3s ease;
+}
+
+.sub-menu-item:last-child {
+  margin-bottom: 0;
+}
+
+.sub-menu-item:active {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.sub-menu-text {
+  font-size: 26rpx;
+  color: #e5e5e5;
+}
+
+.sub-menu-count {
+  background: #ef4444;
+  color: white;
+  padding: 4rpx 8rpx;
+  border-radius: 8rpx;
+  font-size: 18rpx;
+  font-weight: 500;
+  min-width: 32rpx;
+  text-align: center;
+}
+
+/* 会员推广 */
+.member-promotion {
+  background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  border: 2rpx solid #f59e0b;
+}
+
+.promotion-header {
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+
+.promotion-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #f59e0b;
+}
+
+.promotion-features {
+  margin-bottom: 32rpx;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  gap: 16rpx;
+}
+
+.feature-item:last-child {
+  margin-bottom: 0;
+}
+
+.feature-icon {
+  font-size: 32rpx;
+}
+
+.feature-text {
+  font-size: 28rpx;
+  color: #d1d5db;
+}
+
+.upgrade-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border: none;
+  border-radius: 12rpx;
+  padding: 32rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+}
+
+/* 会员状态 */
+.member-status {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.status-header {
+  margin-bottom: 16rpx;
+}
+
+.status-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.status-content {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.status-text {
+  font-size: 28rpx;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.expire-text {
+  font-size: 24rpx;
+  opacity: 0.8;
+}
+
+/* 底部操作 */
+.bottom-actions {
+  text-align: center;
+  padding: 32rpx 0;
+}
+
+.back-btn {
+  background: #374151;
+  color: #e5e5e5;
+  border: none;
+  border-radius: 12rpx;
+  padding: 24rpx 48rpx;
+  font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.btn-icon {
+  font-size: 32rpx;
+}

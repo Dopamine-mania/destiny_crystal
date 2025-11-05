@@ -1,0 +1,35 @@
+/* 全局样式重置 */
+page {
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 32rpx;
+  line-height: 1.4;
+}
+
+/* 重置默认样式 */
+view, text, button, input, picker {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+button::after {
+  display: none;
+}
+
+input {
+  outline: none;
+}
+
+picker {
+  color: inherit;
+}

@@ -1,0 +1,147 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="header-top">
+      <view class="back-btn" bindtap="onBack">
+        <text class="back-icon">←</text>
+      </view>
+      <view class="title">
+        <text class="icon">📊</text>
+        <text class="title-text">我的报告</text>
+      </view>
+      <view class="new-btn" bindtap="onCreateNew">
+        <text class="new-icon">+</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text class="count-text">共{{reports.length}}份报告</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{isLoading}}" class="loading">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">加载报告列表中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{isEmpty}}" class="empty-state">
+    <text class="empty-icon">📄</text>
+    <text class="empty-title">暂无报告</text>
+    <text class="empty-desc">您还没有生成过命理报告</text>
+    <button class="create-btn" bindtap="onCreateNew">
+      <text class="btn-icon">✨</text>
+      <text class="btn-text">立即生成报告</text>
+    </button>
+  </view>
+
+  <!-- 报告列表 -->
+  <view wx:else class="reports-list">
+    <view 
+      wx:for="{{reports}}" 
+      wx:key="id" 
+      class="report-card {{item.status}}"
+      bindtap="onReportTap"
+      data-id="{{item.id}}"
+    >
+      <!-- 状态标签 -->
+      <view wx:if="{{item.status === 'generating'}}" class="status-badge generating">
+        <text class="status-text">生成中</text>
+      </view>
+      <view wx:elif="{{item.status === 'failed'}}" class="status-badge failed">
+        <text class="status-text">生成失败</text>
+      </view>
+      <view wx:elif="{{item.isPremium}}" class="status-badge premium">
+        <text class="status-text">深度版</text>
+      </view>
+
+      <!-- 报告内容 -->
+      <view class="report-content">
+        <view class="report-header">
+          <view class="user-info">
+            <text class="user-name">{{item.name}}</text>
+            <view class="day-master">
+              <text class="master-text">{{item.dayMaster}}</text>
+            </view>
+          </view>
+          <view class="create-time">
+            <text class="time-text">{{item.createTime}}</text>
+          </view>
+        </view>
+
+        <view class="birth-info">
+          <view class="birth-item">
+            <text class="birth-label">出生日期:</text>
+            <text class="birth-value">{{item.birthDate}}</text>
+          </view>
+          <view class="birth-item">
+            <text class="birth-label">出生时辰:</text>
+            <text class="birth-value">{{item.birthTime}}</text>
+          </view>
+        </view>
+
+        <view class="report-preview">
+          <text class="preview-text">{{item.thumbnail}}</text>
+        </view>
+
+        <!-- 操作按钮 -->
+        <view class="report-actions" catchtap="true">
+          <button 
+            wx:if="{{item.status === 'completed'}}"
+            class="action-btn view-btn"
+            bindtap="onReportTap"
+            data-id="{{item.id}}"
+          >
+            <text class="btn-icon">👁</text>
+            <text class="btn-text">查看</text>
+          </button>
+          
+          <button 
+            wx:elif="{{item.status === 'failed'}}"
+            class="action-btn retry-btn"
+            bindtap="onReportTap"
+            data-id="{{item.id}}"
+          >
+            <text class="btn-icon">🔄</text>
+            <text class="btn-text">重试</text>
+          </button>
+
+          <button 
+            wx:if="{{item.status === 'completed'}}"
+            class="action-btn share-btn"
+            bindtap="onShareReport"
+            data-id="{{item.id}}"
+          >
+            <text class="btn-icon">📤</text>
+            <text class="btn-text">分享</text>
+          </button>
+
+          <button 
+            class="action-btn delete-btn"
+            bindtap="onDeleteReport"
+            data-id="{{item.id}}"
+          >
+            <text class="btn-icon">🗑</text>
+            <text class="btn-text">删除</text>
+          </button>
+        </view>
+      </view>
+
+      <!-- 生成中的进度提示 -->
+      <view wx:if="{{item.status === 'generating'}}" class="generating-overlay">
+        <view class="generating-content">
+          <text class="generating-icon">⏳</text>
+          <text class="generating-text">正在生成命理报告...</text>
+          <view class="progress-bar">
+            <view class="progress-fill"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view wx:if="{{!isLoading && !isEmpty}}" class="bottom-tip">
+    <text class="tip-text">💡 点击报告卡片可查看详情</text>
+  </view>
+</view>

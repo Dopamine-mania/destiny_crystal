@@ -1,0 +1,450 @@
+.container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e5e5e5;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 24rpx;
+}
+
+.loading-icon {
+  font-size: 64rpx;
+  animation: spin 2s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 页面头部 */
+.header {
+  background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+  padding: 32rpx;
+  border-bottom: 1rpx solid #374151;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+}
+
+.back-btn, .cart-btn {
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #f59e0b;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.icon {
+  font-size: 48rpx;
+}
+
+.title-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+}
+
+/* 个性化推荐说明 */
+.recommendation-info {
+  margin-top: 24rpx;
+}
+
+.info-card {
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.info-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.info-desc {
+  font-size: 26rpx;
+  color: #d1d5db;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.gods-display {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.god-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.god-label {
+  font-size: 24rpx;
+  color: #9ca3af;
+  min-width: 100rpx;
+}
+
+.gods-list {
+  display: flex;
+  gap: 8rpx;
+  flex-wrap: wrap;
+}
+
+.god-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.god-tag.favorable {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1rpx solid rgba(16, 185, 129, 0.3);
+}
+
+.god-tag.unfavorable {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1rpx solid rgba(239, 68, 68, 0.3);
+}
+
+/* 筛选和排序 */
+.filter-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: #1a1a1a;
+  border-bottom: 1rpx solid #374151;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 24rpx;
+}
+
+.filter-tab {
+  padding: 12rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  color: #9ca3af;
+  border: 1rpx solid #374151;
+  transition: all 0.3s ease;
+}
+
+.filter-tab.active {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+}
+
+.sort-picker {
+  min-width: 120rpx;
+}
+
+.sort-btn {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 16rpx;
+  background: #374151;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #e5e5e5;
+}
+
+/* 水晶列表 */
+.crystal-list {
+  padding: 32rpx;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 120rpx 32rpx;
+}
+
+.empty-icon {
+  font-size: 96rpx;
+  display: block;
+  margin-bottom: 24rpx;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+.crystal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.crystal-card {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 2rpx solid #374151;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.crystal-card.recommended {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #1a1a1a, rgba(16, 185, 129, 0.05));
+}
+
+.crystal-card:active {
+  transform: scale(0.98);
+}
+
+/* 推荐和警告标签 */
+.recommend-badge {
+  position: absolute;
+  top: -1rpx;
+  right: 24rpx;
+  background: linear-gradient(135deg, #10b981, #34d399);
+  padding: 8rpx 16rpx;
+  border-radius: 0 0 12rpx 12rpx;
+  z-index: 2;
+}
+
+.warning-badge {
+  position: absolute;
+  top: -1rpx;
+  right: 24rpx;
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  padding: 8rpx 16rpx;
+  border-radius: 0 0 12rpx 12rpx;
+  z-index: 2;
+}
+
+.badge-text {
+  font-size: 20rpx;
+  font-weight: 500;
+  color: white;
+}
+
+/* 水晶图片和元素标签 */
+.crystal-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120rpx;
+  margin-bottom: 16rpx;
+}
+
+.crystal-emoji {
+  font-size: 64rpx;
+}
+
+.element-tag {
+  position: absolute;
+  bottom: -8rpx;
+  right: 20rpx;
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.element-mu {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1rpx solid rgba(34, 197, 94, 0.3);
+}
+
+.element-huo {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1rpx solid rgba(239, 68, 68, 0.3);
+}
+
+.element-tu {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1rpx solid rgba(245, 158, 11, 0.3);
+}
+
+.element-jin {
+  background: rgba(156, 163, 175, 0.2);
+  color: #9ca3af;
+  border: 1rpx solid rgba(156, 163, 175, 0.3);
+}
+
+.element-shui {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1rpx solid rgba(59, 130, 246, 0.3);
+}
+
+/* 水晶信息 */
+.crystal-info {
+  flex: 1;
+}
+
+.crystal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.crystal-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+}
+
+.popularity {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.star {
+  font-size: 20rpx;
+  color: #f59e0b;
+}
+
+.score {
+  font-size: 20rpx;
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+.crystal-desc {
+  font-size: 24rpx;
+  color: #9ca3af;
+  line-height: 1.4;
+  margin-bottom: 16rpx;
+}
+
+.benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.benefit-tag {
+  padding: 6rpx 12rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  color: #f59e0b;
+}
+
+.crystal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.price {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ec4899;
+}
+
+.stock {
+  font-size: 20rpx;
+  color: #9ca3af;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12rpx;
+}
+
+.cart-btn-small, .buy-btn-small {
+  padding: 16rpx 24rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.cart-btn-small {
+  background: #374151;
+  color: #e5e5e5;
+}
+
+.buy-btn-small {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  color: white;
+}
+
+.cart-btn-small:active, .buy-btn-small:active {
+  transform: scale(0.95);
+}
+
+/* 推荐说明 */
+.recommendation-explanation {
+  margin: 48rpx 32rpx 32rpx 32rpx;
+}
+
+.explanation-card {
+  background: rgba(59, 130, 246, 0.05);
+  border: 1rpx solid rgba(59, 130, 246, 0.2);
+  border-radius: 16rpx;
+  padding: 24rpx;
+}
+
+.explanation-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #3b82f6;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.explanation-text {
+  font-size: 24rpx;
+  color: #d1d5db;
+  line-height: 1.5;
+}

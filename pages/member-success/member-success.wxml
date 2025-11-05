@@ -1,0 +1,96 @@
+<view class="container">
+  <!-- 成功页面内容 -->
+  <view class="success-content {{showAnimation ? 'show' : ''}}">
+    <!-- 成功图标 -->
+    <view class="success-icon">
+      <text class="icon-crown">👑</text>
+      <view class="success-ring"></view>
+    </view>
+
+    <!-- 成功信息 -->
+    <view class="success-info">
+      <text class="success-title">会员开通成功！</text>
+      <text class="success-subtitle">欢迎成为Destiny Weaver AI尊贵会员</text>
+    </view>
+
+    <!-- 会员信息卡片 -->
+    <view class="member-card" wx:if="{{memberInfo}}">
+      <view class="card-header">
+        <text class="card-title">会员信息</text>
+        <text class="vip-badge">VIP</text>
+      </view>
+      <view class="card-content">
+        <view class="info-row">
+          <text class="info-label">套餐类型</text>
+          <text class="info-value">{{memberInfo.planName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">开通时间</text>
+          <text class="info-value">{{memberInfo.purchaseTime}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">到期时间</text>
+          <text class="info-value">{{memberInfo.expireTime}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 特权展示 -->
+    <view class="privileges-preview">
+      <text class="preview-title">专享权益已解锁</text>
+      <view class="privileges-grid">
+        <view class="privilege-item">
+          <text class="privilege-icon">✨</text>
+          <text class="privilege-text">深度分析</text>
+        </view>
+        <view class="privilege-item">
+          <text class="privilege-icon">🎯</text>
+          <text class="privilege-text">专属推荐</text>
+        </view>
+        <view class="privilege-item">
+          <text class="privilege-icon">💎</text>
+          <text class="privilege-text">水晶方案</text>
+        </view>
+        <view class="privilege-item">
+          <text class="privilege-icon">📊</text>
+          <text class="privilege-text">月度报告</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 行动按钮 -->
+    <view class="action-buttons">
+      <button class="primary-btn" bindtap="onStartExperience">
+        <text class="btn-icon">🚀</text>
+        <text class="btn-text">立即体验</text>
+      </button>
+      
+      <view class="secondary-buttons">
+        <button class="secondary-btn" bindtap="onViewPrivileges">
+          <text class="btn-text">查看权益</text>
+        </button>
+        <button class="secondary-btn" bindtap="onShare">
+          <text class="btn-text">分享好友</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-actions">
+    <view class="help-section">
+      <text class="help-text">如有疑问，随时联系我们</text>
+      <button class="contact-btn" bindtap="onContactService">
+        <text class="contact-icon">📞</text>
+        <text class="contact-text">联系客服</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 返回按钮 -->
+  <view class="back-section">
+    <button class="back-btn" bindtap="onBack">
+      <text class="back-text">返回首页</text>
+    </button>
+  </view>
+</view>

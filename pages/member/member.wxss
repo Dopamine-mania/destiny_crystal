@@ -1,0 +1,421 @@
+.container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e5e5e5;
+}
+
+/* 页面头部 */
+.header {
+  background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+  padding: 32rpx;
+  border-bottom: 1rpx solid #374151;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.back-btn, .status-btn {
+  width: 80rpx;
+  height: 80rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #f59e0b;
+  border: none;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.icon {
+  font-size: 48rpx;
+}
+
+.title-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+}
+
+.subtitle {
+  text-align: center;
+}
+
+.subtitle-text {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+/* 会员特权 */
+.privileges-section {
+  padding: 32rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 24rpx;
+}
+
+.privileges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+}
+
+.privilege-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx;
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.privilege-icon {
+  font-size: 24rpx;
+}
+
+.privilege-text {
+  font-size: 24rpx;
+  color: #d1d5db;
+}
+
+/* 套餐选择 */
+.plans-section {
+  padding: 32rpx;
+}
+
+.plans-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.plan-card {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  border: 2rpx solid #374151;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.plan-card.selected {
+  border-color: #f59e0b;
+  background: linear-gradient(135deg, #1a1a1a, rgba(245, 158, 11, 0.05));
+  transform: scale(1.02);
+}
+
+.plan-badge {
+  position: absolute;
+  top: -1rpx;
+  right: 24rpx;
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  padding: 8rpx 16rpx;
+  border-radius: 0 0 12rpx 12rpx;
+  z-index: 2;
+}
+
+.badge-text {
+  font-size: 20rpx;
+  font-weight: 500;
+  color: white;
+}
+
+.plan-header {
+  margin-bottom: 24rpx;
+}
+
+.plan-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #e5e5e5;
+  margin-bottom: 8rpx;
+}
+
+.plan-description {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+.plan-pricing {
+  margin-bottom: 32rpx;
+  text-align: center;
+}
+
+.current-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 8rpx;
+}
+
+.price-symbol {
+  font-size: 28rpx;
+  color: #ec4899;
+  font-weight: bold;
+}
+
+.price-value {
+  font-size: 64rpx;
+  color: #ec4899;
+  font-weight: bold;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  color: #9ca3af;
+  margin-left: 8rpx;
+}
+
+.original-price {
+  margin-bottom: 8rpx;
+}
+
+.original-text {
+  font-size: 22rpx;
+  color: #6b7280;
+  text-decoration: line-through;
+}
+
+.savings {
+  background: rgba(239, 68, 68, 0.2);
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  display: inline-block;
+}
+
+.savings-text {
+  font-size: 20rpx;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.plan-features {
+  margin-bottom: 24rpx;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 12rpx;
+}
+
+.feature-icon {
+  font-size: 20rpx;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.feature-text {
+  font-size: 24rpx;
+  color: #d1d5db;
+}
+
+.plan-selection {
+  text-align: center;
+}
+
+.selection-indicator {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #374151;
+  transition: all 0.3s ease;
+}
+
+.selection-indicator.selected {
+  background: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.selection-text {
+  font-size: 24rpx;
+  color: white;
+}
+
+/* 支付方式 */
+.payment-section {
+  padding: 32rpx;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  background: #1a1a1a;
+  border-radius: 12rpx;
+  border: 2rpx solid #374151;
+  transition: all 0.3s ease;
+}
+
+.payment-method.selected {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.method-info {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.method-icon {
+  font-size: 32rpx;
+}
+
+.method-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.method-name {
+  font-size: 28rpx;
+  color: #e5e5e5;
+  font-weight: 500;
+}
+
+.method-desc {
+  font-size: 22rpx;
+  color: #9ca3af;
+}
+
+.method-selection {
+  color: #f59e0b;
+  font-size: 24rpx;
+}
+
+/* 协议确认 */
+.agreement-section {
+  padding: 32rpx;
+}
+
+.agreement-check {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.agreement-checkbox {
+  font-size: 28rpx;
+  color: #f59e0b;
+}
+
+.agreement-text {
+  font-size: 26rpx;
+  color: #9ca3af;
+}
+
+.agreement-link {
+  font-size: 26rpx;
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* 购买按钮 */
+.purchase-section {
+  padding: 32rpx;
+  background: #1a1a1a;
+  border-top: 1rpx solid #374151;
+  position: sticky;
+  bottom: 0;
+}
+
+.price-summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24rpx;
+  gap: 8rpx;
+}
+
+.summary-text {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+.summary-price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ec4899;
+}
+
+.purchase-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.purchase-btn.active {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  color: white;
+}
+
+.purchase-btn.disabled {
+  background: #4b5563;
+  color: #9ca3af;
+  opacity: 0.6;
+}
+
+.purchase-btn:active:not(.disabled) {
+  transform: scale(0.98);
+}
+
+/* 底部说明 */
+.bottom-info {
+  padding: 32rpx;
+  background: rgba(55, 65, 81, 0.3);
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-icon {
+  font-size: 24rpx;
+}
+
+.info-text {
+  font-size: 24rpx;
+  color: #9ca3af;
+}

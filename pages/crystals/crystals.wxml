@@ -1,0 +1,162 @@
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{isLoading}}" class="loading">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">正在为您推荐水晶...</text>
+  </view>
+
+  <view wx:else>
+    <!-- 页面头部 -->
+    <view class="header">
+      <view class="header-top">
+        <view class="back-btn" bindtap="onBack">
+          <text class="back-icon">←</text>
+        </view>
+        <view class="title">
+          <text class="icon">💎</text>
+          <text class="title-text">水晶推荐</text>
+        </view>
+        <view class="cart-btn" bindtap="onGoToCart">
+          <text class="cart-icon">🛒</text>
+        </view>
+      </view>
+      
+      <!-- 个性化推荐说明 -->
+      <view class="recommendation-info">
+        <view class="info-card">
+          <text class="info-title">🎯 专属推荐</text>
+          <text class="info-desc">根据您的喜用神「{{favorableGods.join('、')}}」，为您精选以下水晶</text>
+          <view class="gods-display">
+            <view class="god-item favorable">
+              <text class="god-label">喜用神:</text>
+              <view class="gods-list">
+                <text wx:for="{{favorableGods}}" wx:key="index" class="god-tag favorable">{{item}}</text>
+              </view>
+            </view>
+            <view wx:if="{{unfavorableGods.length > 0}}" class="god-item unfavorable">
+              <text class="god-label">忌神:</text>
+              <view class="gods-list">
+                <text wx:for="{{unfavorableGods}}" wx:key="index" class="god-tag unfavorable">{{item}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 筛选和排序 -->
+    <view class="filter-section">
+      <view class="filter-tabs">
+        <view 
+          class="filter-tab {{selectedFilter === 'all' ? 'active' : ''}}"
+          bindtap="onFilterChange"
+          data-filter="all"
+        >全部</view>
+        <view 
+          class="filter-tab {{selectedFilter === 'favorable' ? 'active' : ''}}"
+          bindtap="onFilterChange"
+          data-filter="favorable"
+        >推荐</view>
+        <view 
+          class="filter-tab {{selectedFilter === 'unfavorable' ? 'active' : ''}}"
+          bindtap="onFilterChange"
+          data-filter="unfavorable"
+        >不适合</view>
+      </view>
+      
+      <picker class="sort-picker" mode="selector" range="['默认排序', '价格排序', '人气排序']" bindchange="onSortChange">
+        <view class="sort-btn">
+          <text class="sort-text">排序</text>
+          <text class="sort-icon">⇅</text>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 水晶列表 -->
+    <view class="crystal-list">
+      <view wx:if="{{recommendedCrystals.length === 0}}" class="empty-state">
+        <text class="empty-icon">💎</text>
+        <text class="empty-text">暂无符合条件的水晶</text>
+      </view>
+
+      <view wx:else class="crystal-grid">
+        <view 
+          wx:for="{{recommendedCrystals}}" 
+          wx:key="id" 
+          class="crystal-card {{favorableGods.includes(item.element) ? 'recommended' : ''}}"
+          bindtap="onCrystalDetail"
+          data-id="{{item.id}}"
+        >
+          <!-- 推荐标签 -->
+          <view wx:if="{{favorableGods.includes(item.element)}}" class="recommend-badge">
+            <text class="badge-text">为您推荐</text>
+          </view>
+          
+          <!-- 不适合标签 -->
+          <view wx:if="{{unfavorableGods.includes(item.element)}}" class="warning-badge">
+            <text class="badge-text">不适合</text>
+          </view>
+
+          <view class="crystal-image">
+            <text class="crystal-emoji">💎</text>
+            <view class="element-tag element-{{item.element}}">
+              <text class="element-text">{{item.element}}</text>
+            </view>
+          </view>
+
+          <view class="crystal-info">
+            <view class="crystal-header">
+              <text class="crystal-name">{{item.name}}</text>
+              <view class="popularity">
+                <text class="star">⭐</text>
+                <text class="score">{{item.popularity}}</text>
+              </view>
+            </view>
+            
+            <text class="crystal-desc">{{item.description}}</text>
+            
+            <view class="benefits">
+              <text wx:for="{{item.benefits}}" wx:key="index" class="benefit-tag">{{item}}</text>
+            </view>
+            
+            <view class="crystal-footer">
+              <view class="price-section">
+                <text class="price">¥{{item.price}}</text>
+                <text class="stock">库存{{item.stock}}</text>
+              </view>
+              
+              <view class="action-buttons" catchtap="true">
+                <button 
+                  class="cart-btn-small"
+                  bindtap="onAddToCart"
+                  data-crystal="{{item}}"
+                >
+                  <text class="btn-text">加购物车</text>
+                </button>
+                <button 
+                  class="buy-btn-small"
+                  bindtap="onBuyNow"
+                  data-crystal="{{item}}"
+                >
+                  <text class="btn-text">立即购买</text>
+                </button>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 智能推荐说明 -->
+    <view class="recommendation-explanation">
+      <view class="explanation-card">
+        <text class="explanation-title">💡 推荐原理</text>
+        <text class="explanation-text">
+          根据您的八字五行分析，系统为您推荐与喜用神匹配的水晶。
+          喜用神水晶能够补充您命中所需的五行能量，增强运势。
+          请避免选择与忌神对应的水晶，以免产生负面影响。
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

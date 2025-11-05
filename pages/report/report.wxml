@@ -1,0 +1,254 @@
+<view class="container">
+  <view wx:if="{{isLoading}}" class="loading">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">正在生成您的命理报告...</text>
+  </view>
+
+  <view wx:else class="report-content">
+    <view class="header">
+      <view class="title">
+        <text class="icon">✨</text>
+        <text class="title-text">{{userInfo.name}} 的命理报告</text>
+      </view>
+      <text class="subtitle">基于四柱命理学AI分析</text>
+    </view>
+
+    <!-- 免费内容：五行分布图 -->
+    <view class="section">
+      <view class="section-title">🔥 五行力量分布</view>
+      <view class="elements-chart">
+        <view wx:for="{{baziReport.freeContent.elements.distribution}}" wx:key="index" class="element-bar">
+          <view class="element-name">{{item[0]}}</view>
+          <view class="element-progress">
+            <view class="element-fill" style="width: {{item[1]}}%"></view>
+          </view>
+          <text class="element-value">{{item[1]}}%</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 免费内容：日主分析 -->
+    <view class="section">
+      <view class="section-title">🌟 日主分析</view>
+      <view class="day-master-card">
+        <view class="day-master-main">
+          <text class="day-master-text">{{baziReport.freeContent.dayMaster.element}}</text>
+        </view>
+        <text class="day-master-desc">{{baziReport.freeContent.dayMaster.description}}</text>
+      </view>
+    </view>
+
+    <!-- 免费内容：五行同类异类分析 (旭日图) -->
+    <view class="section">
+      <view class="section-title">☯️ 五行同类异类分析</view>
+      <view class="sunburst-chart">
+        <view class="sunburst-container">
+          <view class="inner-circle">
+            <text class="center-text">{{baziReport.freeContent.elements.strength.judgment}}</text>
+          </view>
+          <view class="outer-ring">
+            <view class="ring-section same-section" style="--percentage: {{baziReport.freeContent.elements.strength.sameTotal}}%">
+              <view class="section-label">
+                <text class="section-title-text">同类</text>
+                <view class="elements-list">
+                  <text wx:for="{{baziReport.freeContent.elements.strength.same}}" wx:key="index" class="element-chip">{{item}}</text>
+                </view>
+                <text class="section-percentage">{{baziReport.freeContent.elements.strength.sameTotal}}%</text>
+              </view>
+            </view>
+            <view class="ring-section different-section" style="--percentage: {{baziReport.freeContent.elements.strength.differentTotal}}%">
+              <view class="section-label">
+                <text class="section-title-text">异类</text>
+                <view class="elements-list">
+                  <text wx:for="{{baziReport.freeContent.elements.strength.different}}" wx:key="index" class="element-chip">{{item}}</text>
+                </view>
+                <text class="section-percentage">{{baziReport.freeContent.elements.strength.differentTotal}}%</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 免费内容：五行旺衰判断 -->
+    <view class="section">
+      <view class="section-title">📊 五行旺衰判断</view>
+      <view class="strength-judgment">
+        <view class="judgment-card">
+          <view class="judgment-result">
+            <text class="result-text">{{baziReport.freeContent.elements.strength.judgment}}</text>
+          </view>
+          <view class="judgment-details">
+            <view class="detail-row">
+              <text class="detail-label">同类力量:</text>
+              <view class="strength-bar">
+                <view class="strength-fill same-fill" style="width: {{baziReport.freeContent.elements.strength.sameTotal}}%"></view>
+              </view>
+              <text class="detail-value">{{baziReport.freeContent.elements.strength.sameTotal}}%</text>
+            </view>
+            <view class="detail-row">
+              <text class="detail-label">异类力量:</text>
+              <view class="strength-bar">
+                <view class="strength-fill different-fill" style="width: {{baziReport.freeContent.elements.strength.differentTotal}}%"></view>
+              </view>
+              <text class="detail-value">{{baziReport.freeContent.elements.strength.differentTotal}}%</text>
+            </view>
+          </view>
+          <view class="judgment-conclusion">
+            <text class="conclusion-text">
+              {{baziReport.freeContent.elements.strength.sameTotal > baziReport.freeContent.elements.strength.differentTotal ? '同类力量较强，日主偏旺' : '异类力量较强，日主偏弱'}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 免费内容：五行平衡天平 -->
+    <view class="section">
+      <view class="section-title">⚖️ 五行平衡天平</view>
+      <view class="balance-scale {{scaleAnimated ? \"animated\" : \"\"}}">
+        <view class="scale-container">
+          <view class="scale-beam"></view>
+          <view class="scale-center">⚖️</view>
+          
+          <!-- 左边天平盘 (同类) -->
+          <view class="scale-pan left-pan">
+            <view class="pan-content">
+              <text class="pan-label">同类 (助力)</text>
+              <text class="pan-weight">{{baziReport.freeContent.balanceScale.leftSide.weight}}%</text>
+              <view class="element-weights">
+                <view 
+                  wx:for="{{baziReport.freeContent.elements.strength.same}}" 
+                  wx:key="index" 
+                  class="weight-item clickable"
+                  bindtap="onScaleElementTap"
+                  data-element="{{item}}"
+                >
+                  <text class="weight-value">{{Math.round(baziReport.freeContent.balanceScale.leftSide.weight / baziReport.freeContent.elements.strength.same.length)}}g</text>
+                  <text class="weight-element">{{item}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          
+          <!-- 右边天平盘 (异类) -->
+          <view class="scale-pan right-pan">
+            <view class="pan-content">
+              <text class="pan-label">异类 (压力)</text>
+              <text class="pan-weight">{{baziReport.freeContent.balanceScale.rightSide.weight}}%</text>
+              <view class="element-weights">
+                <view 
+                  wx:for="{{baziReport.freeContent.elements.strength.different}}" 
+                  wx:key="index" 
+                  class="weight-item clickable"
+                  bindtap="onScaleElementTap"
+                  data-element="{{item}}"
+                >
+                  <text class="weight-value">{{Math.round(baziReport.freeContent.balanceScale.rightSide.weight / baziReport.freeContent.elements.strength.different.length)}}g</text>
+                  <text class="weight-element">{{item}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 天平说明 -->
+        <view class="scale-explanation">
+          <text class="explanation-text">💡 点击天平上的砝码查看对应五行的详细说明</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 付费墙 -->
+    <view wx:if="{{!isPremiumUser}}" class="paywall-section">
+      <view class="paywall-divider">
+        <text class="divider-text">以下内容需要解锁深度分析</text>
+      </view>
+      
+      <view class="locked-preview">
+        <view class="preview-item">
+          <text class="preview-title">🙏 喜用神分析</text>
+          <text class="preview-content">深度分析您的喜用神和忌神...</text>
+          <view class="lock-overlay">🔒</view>
+        </view>
+      </view>
+
+      <view class="unlock-buttons {{paywallHighlight ? \"highlight\" : \"\"}}">
+        <button class="unlock-btn" bindtap="onUnlockPremium" data-type="single">
+          <text class="btn-title">单模块解锁 ¥9.9</text>
+        </button>
+        <button class="unlock-btn premium" bindtap="onUnlockPremium" data-type="annual">
+          <text class="btn-title">年度会员 ¥99.9</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 付费内容 (解锁后显示) -->
+    <view wx:if="{{isPremiumUser}}" class="premium-sections">
+      <view class="section">
+        <view class="section-title">🙏 喜用神深度分析</view>
+        <view class="premium-content">
+          <text class="analysis-text">{{baziReport.premiumContent.favorableGods.analysis}}</text>
+          <view class="gods-tags">
+            <text wx:for="{{baziReport.premiumContent.favorableGods.favorable}}" wx:key="index" 
+                  class="god-tag favorable">{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 水晶推荐 -->
+      <view class="section crystal-section">
+        <view class="section-title">💎 专属补运水晶</view>
+        <view class="crystal-intro">
+          <text class="intro-text">根据您的喜用神「{{baziReport.premiumContent.favorableGods.favorable.join('、')}}」，为您推荐以下水晶:</text>
+          <button class="explore-crystals-btn" bindtap="onExploreCrystals">
+            <text class="btn-icon">🔍</text>
+            <text class="btn-text">探索更多水晶</text>
+          </button>
+        </view>
+        <view class="crystals-grid">
+          <view wx:for="{{baziReport.crystalRecommendations}}" wx:key="index" class="crystal-card">
+            <view class="crystal-header">
+              <view class="crystal-name">{{item.name}}</view>
+              <view class="element-badge element-{{item.element}}">{{item.element}}</view>
+            </view>
+            <view class="crystal-price">¥{{item.price}}</view>
+            <view class="crystal-desc">{{item.description}}</view>
+            <view class="crystal-actions">
+              <button class="add-cart-btn" bindtap="onAddToCart" data-crystal="{{item}}">
+                <text class="cart-icon">🛒</text>
+                <text>加购物车</text>
+              </button>
+              <button class="buy-now-btn" bindtap="onBuyNow" data-crystal="{{item}}">
+                <text class="buy-icon">⚡</text>
+                <text>立即购买</text>
+              </button>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 水晶商城入口 -->
+        <view class="crystal-mall-entry">
+          <button class="mall-entry-btn" bindtap="onExploreCrystals">
+            <view class="entry-content">
+              <text class="entry-icon">💎</text>
+              <view class="entry-text">
+                <text class="entry-title">水晶商城</text>
+                <text class="entry-desc">发现更多符合您命理的水晶</text>
+              </view>
+              <text class="entry-arrow">→</text>
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="actions">
+      <button class="action-btn secondary" bindtap="onBack">返回</button>
+      <button wx:if="{{isPremiumUser}}" class="action-btn primary" bindtap="onViewCart">
+        查看购物车
+      </button>
+    </view>
+  </view>
+</view>

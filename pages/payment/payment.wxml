@@ -1,0 +1,98 @@
+<view class="container">
+  <view class="header">
+    <view class="title">
+      <text class="icon">💳</text>
+      <text class="title-text">支付订单</text>
+    </view>
+  </view>
+
+  <view class="order-summary">
+    <view class="summary-title">订单详情</view>
+    <view class="order-items">
+      <view wx:for="{{cartItems}}" wx:key="id" class="order-item">
+        <view class="item-info">
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-quantity">x{{item.quantity}}</text>
+        </view>
+        <text class="item-total">¥{{item.price * item.quantity}}</text>
+      </view>
+    </view>
+    <view class="total-line">
+      <text class="total-label">总计:</text>
+      <text class="total-amount">¥{{totalAmount}}</text>
+    </view>
+  </view>
+
+  <!-- 收货地址 -->
+  <view class="address-section">
+    <view class="section-title">收货地址</view>
+    <view class="address-card" bindtap="onSelectAddress">
+      <view wx:if="{{selectedAddress}}" class="address-content">
+        <view class="address-header">
+          <text class="recipient-name">{{selectedAddress.name}}</text>
+          <text class="recipient-phone">{{selectedAddress.phone}}</text>
+          <text wx:if="{{selectedAddress.tag}}" class="address-tag">{{selectedAddress.tag}}</text>
+        </view>
+        <view class="address-detail">
+          <text class="address-text">{{selectedAddress.fullAddress}}</text>
+        </view>
+      </view>
+      <view wx:else class="no-address">
+        <text class="no-address-icon">📍</text>
+        <text class="no-address-text">请选择收货地址</text>
+      </view>
+      <view class="address-arrow">
+        <text class="arrow-icon">→</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="payment-methods">
+    <view class="payment-title">选择支付方式</view>
+    <view class="payment-options">
+      <view 
+        wx:for="{{paymentMethods}}" 
+        wx:key="id" 
+        class="payment-option {{selectedPayment === item.id ? 'selected' : ''}} {{!item.enabled ? 'disabled' : ''}}"
+        bindtap="onPaymentMethodTap"
+        data-id="{{item.id}}"
+      >
+        <view class="payment-left">
+          <text class="payment-icon">{{item.icon}}</text>
+          <view class="payment-info">
+            <text class="payment-name">{{item.name}}</text>
+            <text wx:if="{{!item.enabled}}" class="payment-tip">{{item.tip}}</text>
+          </view>
+        </view>
+        <view class="payment-radio">
+          <text wx:if="{{selectedPayment === item.id && item.enabled}}" class="radio-checked">●</text>
+          <text wx:else class="radio-unchecked">○</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="payment-actions">
+    <button class="action-btn secondary" bindtap="onBack">
+      <text class="btn-icon">⬅️</text>
+      <text>返回</text>
+    </button>
+    <button 
+      class="action-btn primary {{isLoading ? 'loading' : ''}}"
+      bindtap="onConfirmPayment"
+      disabled="{{isLoading}}"
+    >
+      <text class="btn-icon">{{isLoading ? '⏳' : '💰'}}</text>
+      <text>{{isLoading ? '处理中...' : '确认支付'}}</text>
+    </button>
+  </view>
+
+  <view wx:if="{{isLoading}}" class="payment-processing">
+    <view class="processing-overlay">
+      <view class="processing-content">
+        <text class="processing-icon">⏳</text>
+        <text class="processing-text">正在处理支付...</text>
+      </view>
+    </view>
+  </view>
+</view>

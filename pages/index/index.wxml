@@ -1,0 +1,115 @@
+<view class="container">
+  <view class="header">
+    <view class="header-top">
+      <view class="title">
+        <text class="icon">📅</text>
+        <text class="title-text">出生信息</text>
+      </view>
+      <view class="profile-entry" bindtap="onProfileTap">
+        <text class="profile-icon">👤</text>
+      </view>
+    </view>
+    <text class="subtitle">请准确填写您的出生年月日时，这将影响分析的准确性</text>
+  </view>
+
+  <view class="form-container">
+    <!-- Name Input -->
+    <view class="form-item">
+      <view class="label">您的姓名</view>
+      <view class="input-wrapper">
+        <text class="input-icon">👤</text>
+        <input 
+          class="input"
+          type="text" 
+          value="{{name}}"
+          bindinput="onNameInput"
+          placeholder="请输入2-4个字的姓名"
+          placeholder-class="placeholder"
+        />
+      </view>
+    </view>
+
+    <!-- Gender Selection -->
+    <view class="form-item">
+      <view class="label">您的性别</view>
+      <view class="gender-options">
+        <view 
+          class="gender-btn {{gender === 'male' ? 'active' : ''}}"
+          bindtap="onGenderTap"
+          data-gender="male"
+        >
+          <text class="gender-emoji">👨</text>
+          <text>男性</text>
+        </view>
+        <view 
+          class="gender-btn {{gender === 'female' ? 'active' : ''}}"
+          bindtap="onGenderTap"
+          data-gender="female"
+        >
+          <text class="gender-emoji">👩</text>
+          <text>女性</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Birth Date -->
+    <view class="form-item">
+      <view class="label">出生日期 (阳历)</view>
+      <view class="date-selectors">
+        <picker 
+          class="date-picker"
+          mode="selector"
+          range="{{years}}"
+          range-key="text"
+          bindchange="onYearChange"
+        >
+          <view class="picker-text">{{year}}年</view>
+        </picker>
+        <picker 
+          class="date-picker"
+          mode="selector"
+          range="{{months}}"
+          range-key="text"
+          bindchange="onMonthChange"
+        >
+          <view class="picker-text">{{month}}月</view>
+        </picker>
+        <picker 
+          class="date-picker"
+          mode="selector"
+          range="{{days}}"
+          range-key="text"
+          bindchange="onDayChange"
+        >
+          <view class="picker-text">{{day}}日</view>
+        </picker>
+      </view>
+    </view>
+
+    <!-- Birth Time -->
+    <view class="form-item">
+      <view class="label">出生时间</view>
+      <picker 
+        class="time-picker"
+        mode="selector"
+        range="{{hourOptions}}"
+        range-key="text"
+        bindchange="onHourChange"
+      >
+        <view class="picker-text">
+          {{selectedHourText || '选择出生时辰'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- Submit Button -->
+  <button 
+    class="submit-btn {{isFormValid && !isLoading ? 'active' : 'disabled'}}"
+    bindtap="onSubmit"
+    disabled="{{!isFormValid || isLoading}}"
+  >
+    <text class="btn-icon">{{isLoading ? '⏳' : '✨'}}</text>
+    <text class="btn-text">{{isLoading ? '正在生成报告...' : '立即生成我的命理报告'}}</text>
+  </button>
+</view>

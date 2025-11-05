@@ -1,0 +1,122 @@
+<view class="container">
+  <!-- 用户信息头部 -->
+  <view class="user-header">
+    <view class="user-avatar">
+      <text class="avatar-icon">{{userInfo.avatar}}</text>
+    </view>
+    <view class="user-info">
+      <view class="user-name">{{userInfo.name}}</view>
+      <view class="user-level {{userInfo.isPremium ? 'premium' : 'normal'}}">
+        <text class="level-icon">{{userInfo.isPremium ? '👑' : '🔰'}}</text>
+        <text class="level-text">{{userInfo.memberLevel}}</text>
+      </view>
+      <!-- 会员到期时间 -->
+      <view wx:if="{{userInfo.isPremium && userInfo.memberExpireDate}}" class="expire-info">
+        <text class="expire-text">会员到期: {{userInfo.memberExpireDate}}</text>
+      </view>
+    </view>
+    <view class="user-actions">
+      <view class="member-badge {{userInfo.isPremium ? 'active' : ''}}" bindtap="navigateToMember">
+        {{userInfo.isPremium ? '会员' : '升级'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷统计 -->
+  <view class="stats-section">
+    <view class="stat-item">
+      <text class="stat-number">{{menuItems[0].count}}</text>
+      <text class="stat-label">历史报告</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{menuItems[1].count}}</text>
+      <text class="stat-label">订单数量</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{menuItems[3].count}}</text>
+      <text class="stat-label">优惠券</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="section-title">我的服务</view>
+    <view class="menu-grid">
+      <view 
+        wx:for="{{menuItems}}" 
+        wx:key="id" 
+        class="menu-item {{item.highlight ? 'highlight' : ''}}"
+        bindtap="onMenuTap"
+        data-id="{{item.id}}"
+      >
+        <view class="menu-icon">{{item.icon}}</view>
+        <view class="menu-content">
+          <view class="menu-title">{{item.title}}</view>
+          <view class="menu-desc">{{item.desc}}</view>
+        </view>
+        <view class="menu-extra">
+          <text wx:if="{{item.count}}" class="count-badge">{{item.count}}</text>
+          <text class="arrow">{{item.id === 'orders' ? (showOrderSubMenu ? '⌄' : '>') : '>'}}</text>
+        </view>
+        
+        <!-- 订单子菜单 -->
+        <view wx:if="{{item.id === 'orders' && showOrderSubMenu}}" class="sub-menu">
+          <view 
+            wx:for="{{item.subItems}}" 
+            wx:key="key" 
+            class="sub-menu-item"
+            bindtap="onOrderSubMenuTap"
+            data-status="{{item.key}}"
+            catchtap="true"
+          >
+            <text class="sub-menu-text">{{item.name}}</text>
+            <text wx:if="{{item.count > 0}}" class="sub-menu-count">{{item.count}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 会员特权展示 -->
+  <view wx:if="{{!userInfo.isPremium}}" class="member-promotion">
+    <view class="promotion-header">
+      <text class="promotion-title">🌟 开通会员享特权</text>
+    </view>
+    <view class="promotion-features">
+      <view class="feature-item">
+        <text class="feature-icon">✨</text>
+        <text class="feature-text">解锁所有深度分析</text>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">🎯</text>
+        <text class="feature-text">专属喜用神推荐</text>
+      </view>
+      <view class="feature-item">
+        <text class="feature-icon">💎</text>
+        <text class="feature-text">个性化水晶方案</text>
+      </view>
+    </view>
+    <button class="upgrade-btn" bindtap="navigateToMember">
+      <text class="btn-text">立即开通年度会员 ¥99.9</text>
+    </button>
+  </view>
+
+  <!-- 已开通会员显示 -->
+  <view wx:if="{{userInfo.isPremium}}" class="member-status">
+    <view class="status-header">
+      <text class="status-title">👑 会员特权已开通</text>
+    </view>
+    <view class="status-content">
+      <text class="status-text">享受所有深度分析功能</text>
+      <text class="expire-text">永久有效</text>
+    </view>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-actions">
+    <button class="back-btn" bindtap="onBackToHome">
+      <text class="btn-icon">🏠</text>
+      <text>返回首页</text>
+    </button>
+  </view>
+</view>

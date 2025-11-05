@@ -1,2 +1,20 @@
-// This file is a placeholder to prevent build errors.
-App({});
+App({
+  globalData: {
+    userInfo: null,
+    baziReport: null,
+    cartItems: []
+  },
+
+  onLaunch() {
+    // 小程序启动时执行
+    console.log("命运编织师AI 小程序启动")
+  },
+
+  onShow() {
+    // 小程序显示时执行
+  },
+
+  onHide() {
+    // 小程序隐藏时执行
+  }
+})

@@ -1,0 +1,866 @@
+.container {
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding: 32rpx;
+}
+
+/* Loading */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 24rpx;
+}
+
+.loading-icon {
+  font-size: 64rpx;
+  animation: spin 2s linear infinite;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #9ca3af;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 48rpx;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.icon {
+  font-size: 48rpx;
+  margin-right: 16rpx;
+  color: #f59e0b;
+}
+
+.title-text {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+/* Section */
+.section {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+  border: 2rpx solid #374151;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+/* 五行分布图 */
+.elements-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.element-bar {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.element-name {
+  min-width: 80rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #e5e5e5;
+}
+
+.element-progress {
+  flex: 1;
+  height: 32rpx;
+  background: #374151;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+}
+
+.element-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ec4899, #f59e0b);
+  border-radius: 16rpx;
+  transition: width 1s ease;
+}
+
+.element-value {
+  min-width: 80rpx;
+  text-align: right;
+  font-size: 24rpx;
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+/* 日主分析 */
+.day-master-card {
+  text-align: center;
+  padding: 32rpx;
+  background: linear-gradient(135deg, #1a1a1a, #2d1b69);
+  border-radius: 12rpx;
+  border: 2rpx solid #f59e0b;
+}
+
+.day-master-main {
+  margin-bottom: 24rpx;
+}
+
+.day-master-text {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  text-shadow: 0 0 16rpx rgba(245, 158, 11, 0.3);
+}
+
+.day-master-desc {
+  font-size: 28rpx;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+/* 旭日图 */
+.sunburst-chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
+  margin: 32rpx 0;
+}
+
+.sunburst-container {
+  position: relative;
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.inner-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160rpx;
+  height: 160rpx;
+  background: #374151;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.center-text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  text-align: center;
+}
+
+.outer-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ring-section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.same-section {
+  background: conic-gradient(from 0deg, #10b981 0%, #10b981 var(--percentage), transparent var(--percentage));
+}
+
+.different-section {
+  background: conic-gradient(from calc(var(--percentage) * 3.6deg), #ef4444 0%, #ef4444 calc(100% - var(--percentage)), transparent calc(100% - var(--percentage)));
+}
+
+.section-label {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 12rpx;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+}
+
+.section-title-text {
+  color: #e5e5e5;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.elements-list {
+  display: flex;
+  gap: 4rpx;
+  margin-bottom: 8rpx;
+}
+
+.element-chip {
+  padding: 4rpx 8rpx;
+  background: rgba(245, 158, 11, 0.2);
+  border-radius: 4rpx;
+  font-size: 18rpx;
+  color: #f59e0b;
+}
+
+.section-percentage {
+  color: #9ca3af;
+  font-size: 18rpx;
+}
+
+/* 力量判断 */
+.strength-judgment {
+  background: #1f1f1f;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  border: 1rpx solid #374151;
+}
+
+.judgment-card {
+  text-align: center;
+}
+
+.judgment-result {
+  margin-bottom: 24rpx;
+}
+
+.result-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  text-shadow: 0 0 8rpx rgba(245, 158, 11, 0.3);
+}
+
+.judgment-details {
+  margin-bottom: 24rpx;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.detail-label {
+  min-width: 120rpx;
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 24rpx;
+  background: #374151;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  border-radius: 12rpx;
+  transition: width 1s ease;
+}
+
+.same-fill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.different-fill {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.detail-value {
+  min-width: 80rpx;
+  text-align: right;
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #e5e5e5;
+}
+
+.judgment-conclusion {
+  padding: 16rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 8rpx;
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.conclusion-text {
+  font-size: 26rpx;
+  color: #d1d5db;
+  line-height: 1.4;
+}
+
+/* Balance Scale Animation */
+.balance-scale {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 48rpx 32rpx 32rpx 32rpx;
+  border: 2rpx solid #374151;
+  position: relative;
+  min-height: 350rpx;
+}
+
+.scale-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scale-beam {
+  position: absolute;
+  width: 400rpx;
+  height: 8rpx;
+  background: #9ca3af;
+  border-radius: 4rpx;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 1.5s ease;
+}
+
+.balance-scale.animated .scale-beam {
+  transform: translate(-50%, -50%) rotate(-5deg);
+}
+
+.scale-center {
+  position: absolute;
+  font-size: 48rpx;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.scale-pan {
+  position: absolute;
+  width: 200rpx;
+  min-height: 120rpx;
+  background: #374151;
+  border-radius: 12rpx;
+  top: 60%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 16rpx 12rpx;
+  transition: transform 1.5s ease;
+}
+
+.left-pan {
+  left: 5%;
+}
+
+.right-pan {
+  right: 5%;
+}
+
+.balance-scale.animated .left-pan {
+  transform: translateY(20rpx);
+}
+
+.balance-scale.animated .right-pan {
+  transform: translateY(-20rpx);
+}
+
+.pan-content {
+  text-align: center;
+  width: 100%;
+}
+
+.pan-label {
+  display: block;
+  font-size: 20rpx;
+  color: #9ca3af;
+  margin-bottom: 8rpx;
+}
+
+.pan-weight {
+  display: block;
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 12rpx;
+}
+
+/* 天平砝码样式 */
+.element-weights {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.weight-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6rpx 12rpx;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: 8rpx;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.weight-item.clickable:hover {
+  background: rgba(245, 158, 11, 0.2);
+  transform: scale(1.05);
+}
+
+.weight-item.clickable:active {
+  transform: scale(0.95);
+}
+
+.weight-value {
+  font-size: 18rpx;
+  color: #f59e0b;
+  font-weight: bold;
+}
+
+.weight-element {
+  font-size: 20rpx;
+  color: #e5e5e5;
+  font-weight: 500;
+}
+
+/* 天平说明 */
+.scale-explanation {
+  margin-top: 24rpx;
+  text-align: center;
+  padding: 16rpx;
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.explanation-text {
+  font-size: 22rpx;
+  color: #d1d5db;
+  line-height: 1.4;
+}
+
+/* Premium Sections */
+.premium-sections {
+  margin-top: 32rpx;
+}
+
+.premium-content {
+  padding: 24rpx;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(16, 185, 129, 0.2);
+}
+
+.analysis-text {
+  font-size: 28rpx;
+  color: #d1d5db;
+  line-height: 1.5;
+  margin-bottom: 16rpx;
+}
+
+.gods-tags {
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+}
+
+.god-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.god-tag.favorable {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1rpx solid rgba(16, 185, 129, 0.3);
+}
+
+/* Crystal Section */
+.crystal-section {
+  background: linear-gradient(135deg, #1a1a1a, rgba(245, 158, 11, 0.05));
+  border: 2rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.crystals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+}
+
+.crystal-intro {
+  margin-bottom: 24rpx;
+  padding: 24rpx;
+  background: rgba(245, 158, 11, 0.05);
+  border-radius: 12rpx;
+  border: 1rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.intro-text {
+  font-size: 26rpx;
+  color: #d1d5db;
+  line-height: 1.4;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.explore-crystals-btn {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border: none;
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: white;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.crystal-card {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 2rpx solid #374151;
+  margin-bottom: 16rpx;
+}
+
+.crystal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+}
+
+.element-badge {
+  padding: 6rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.element-tu {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+  border: 1rpx solid rgba(245, 158, 11, 0.3);
+}
+
+.element-huo {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1rpx solid rgba(239, 68, 68, 0.3);
+}
+
+.element-mu {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1rpx solid rgba(34, 197, 94, 0.3);
+}
+
+.element-jin {
+  background: rgba(156, 163, 175, 0.2);
+  color: #9ca3af;
+  border: 1rpx solid rgba(156, 163, 175, 0.3);
+}
+
+.element-shui {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1rpx solid rgba(59, 130, 246, 0.3);
+}
+
+.crystal-actions {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.add-cart-btn, .buy-now-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.add-cart-btn {
+  background: #374151;
+  color: #e5e5e5;
+}
+
+.buy-now-btn {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  color: white;
+}
+
+.add-cart-btn:active, .buy-now-btn:active {
+  transform: scale(0.95);
+}
+
+/* 水晶商城入口 */
+.crystal-mall-entry {
+  margin-top: 32rpx;
+  padding: 24rpx;
+  background: linear-gradient(135deg, #1a1a1a, rgba(245, 158, 11, 0.05));
+  border-radius: 16rpx;
+  border: 2rpx solid rgba(245, 158, 11, 0.2);
+}
+
+.mall-entry-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+.entry-content {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.entry-icon {
+  font-size: 48rpx;
+}
+
+.entry-text {
+  flex: 1;
+  text-align: left;
+}
+
+.entry-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.entry-desc {
+  font-size: 24rpx;
+  color: #9ca3af;
+}
+
+.entry-arrow {
+  font-size: 32rpx;
+  color: #f59e0b;
+}
+
+.crystal-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 16rpx;
+}
+
+.crystal-price {
+  font-size: 36rpx;
+  color: #ec4899;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.crystal-desc {
+  font-size: 24rpx;
+  color: #9ca3af;
+  line-height: 1.4;
+  margin-bottom: 24rpx;
+}
+
+/* Paywall Styles */
+.paywall-section {
+  margin-top: 48rpx;
+  position: relative;
+}
+
+.paywall-divider {
+  text-align: center;
+  margin: 48rpx 0;
+  position: relative;
+}
+
+.paywall-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2rpx;
+  background: linear-gradient(90deg, transparent, #374151, transparent);
+}
+
+.divider-text {
+  background: #0a0a0a;
+  padding: 0 32rpx;
+  color: #9ca3af;
+  font-size: 28rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.locked-preview {
+  margin-bottom: 32rpx;
+}
+
+.preview-item {
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  border: 2rpx solid #374151;
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #f59e0b;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.preview-content {
+  color: #9ca3af;
+  font-size: 28rpx;
+  line-height: 1.5;
+  filter: blur(2rpx);
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 50%;
+  right: 32rpx;
+  font-size: 48rpx;
+  color: #9ca3af;
+  transform: translateY(-50%);
+}
+
+.unlock-buttons {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 48rpx;
+}
+
+.unlock-buttons.highlight {
+  animation: paywall-shake 0.5s ease-in-out 0s 2;
+}
+
+/* 付费按钮抖动动画 */
+@keyframes paywall-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10rpx); }
+  75% { transform: translateX(10rpx); }
+}
+
+.unlock-buttons.highlight .unlock-btn {
+  background: linear-gradient(135deg, #f59e0b, #ec4899);
+  box-shadow: 0 8rpx 32rpx rgba(245, 158, 11, 0.3);
+  transform: scale(1.02);
+}
+
+.unlock-buttons.highlight .unlock-btn.premium {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  box-shadow: 0 8rpx 32rpx rgba(236, 72, 153, 0.4);
+}
+
+.unlock-btn {
+  flex: 1;
+  background: linear-gradient(135deg, #374151, #1f2937);
+  border: 2rpx solid #4b5563;
+  border-radius: 16rpx;
+  padding: 32rpx 24rpx;
+  text-align: center;
+  color: #e5e5e5;
+  transition: all 0.3s ease;
+}
+
+.unlock-btn.premium {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  border-color: #f59e0b;
+  color: white;
+  position: relative;
+}
+
+.btn-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 48rpx;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  border: none;
+}
+
+.action-btn.secondary {
+  background: #374151;
+  color: #e5e5e5;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #ec4899, #f59e0b);
+  color: white;
+}
+
+.btn-icon {
+  margin-right: 16rpx;
+  font-size: 32rpx;
+}

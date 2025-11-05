@@ -1,0 +1,58 @@
+<view class="container">
+  <view class="success-animation {{showSuccess ? \"show\" : \"\"}}">
+    <text class="success-icon">✅</text>
+    <text class="success-text">支付成功！</text>
+  </view>
+
+  <view class="order-details">
+    <view class="detail-title">订单详情</view>
+    <view class="detail-card">
+      <view class="detail-item">
+        <text class="detail-label">订单号:</text>
+        <text class="detail-value">{{orderInfo.orderNo}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">支付金额:</text>
+        <text class="detail-value amount">¥{{orderInfo.amount}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">支付方式:</text>
+        <text class="detail-value">{{orderInfo.paymentMethod}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">支付时间:</text>
+        <text class="detail-value">{{orderInfo.orderTime}}</text>
+      </view>
+      <view class="detail-item">
+        <text class="detail-label">订单状态:</text>
+        <text class="detail-value status-success">支付成功</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips-section">
+    <view class="tips-title">温馨提示</view>
+    <view class="tips-content">
+      <text class="tip-item">• 您的水晶将在3-5个工作日内发货</text>
+      <text class="tip-item">• 请保持手机畅通，方便配送联系</text>
+      <text class="tip-item">• 如有疑问请联系客服</text>
+      <text class="tip-item">• 感谢您对命运编织师AI的信任</text>
+    </view>
+  </view>
+
+  <view class="action-buttons">
+    <button class="action-btn secondary" bindtap="onViewOrder">
+      <text class="btn-icon">📋</text>
+      <text>查看订单</text>
+    </button>
+    <button class="action-btn secondary" bindtap="onShareResult">
+      <text class="btn-icon">📤</text>
+      <text>分享给好友</text>
+    </button>
+  </view>
+
+  <button class="home-btn" bindtap="onBackToHome">
+    <text class="btn-icon">🏠</text>
+    <text>返回首页</text>
+  </button>
+</view>

@@ -1,0 +1,189 @@
+<view class="container">
+  <!-- 页面头部 -->
+  <view class="header">
+    <view class="header-top">
+      <view class="back-btn" bindtap="onBack">
+        <text class="back-icon">←</text>
+      </view>
+      <view class="title">
+        <text class="icon">📦</text>
+        <text class="title-text">订单管理</text>
+      </view>
+      <view class="placeholder"></view>
+    </view>
+  </view>
+
+  <!-- 订单状态标签 -->
+  <view class="tab-bar">
+    <view 
+      wx:for="{{tabList}}" 
+      wx:key="key" 
+      class="tab-item {{currentTab === item.key ? 'active' : ''}}"
+      bindtap="onTabChange"
+      data-tab="{{item.key}}"
+    >
+      <text class="tab-text">{{item.name}}</text>
+      <text wx:if="{{item.count > 0}}" class="tab-count">{{item.count}}</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{isLoading}}" class="loading">
+    <text class="loading-icon">⏳</text>
+    <text class="loading-text">加载订单列表中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{isEmpty}}" class="empty-state">
+    <text class="empty-icon">📦</text>
+    <text class="empty-title">暂无订单</text>
+    <text class="empty-desc">您还没有任何订单记录</text>
+  </view>
+
+  <!-- 订单列表 -->
+  <view wx:else class="orders-list">
+    <view 
+      wx:for="{{getCurrentOrders()}}" 
+      wx:key="id" 
+      class="order-card {{item.status}}"
+    >
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <view class="order-info">
+          <text class="order-no">订单号：{{item.orderNo}}</text>
+          <text class="create-time">{{item.createTime}}</text>
+        </view>
+        <view class="order-status">
+          <text class="status-text">{{item.statusText}}</text>
+        </view>
+      </view>
+
+      <!-- 商品列表 -->
+      <view class="order-items">
+        <view wx:for="{{item.items}}" wx:key="index" class="order-item">
+          <view class="item-image">
+            <text class="item-emoji">💎</text>
+            <view class="element-tag element-{{item.element}}">{{item.element}}</view>
+          </view>
+          <view class="item-info">
+            <view class="item-name">{{item.name}}</view>
+            <view class="item-price">¥{{item.price}} × {{item.quantity}}</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 订单金额 -->
+      <view class="order-amount">
+        <text class="amount-label">订单总额：</text>
+        <text class="amount-value">¥{{item.totalAmount}}</text>
+      </view>
+
+      <!-- 收货地址 -->
+      <view wx:if="{{item.address}}" class="order-address">
+        <text class="address-label">收货地址：</text>
+        <text class="address-text">{{item.address.name}} {{item.address.phone}} {{item.address.detail}}</text>
+      </view>
+
+      <!-- 物流信息 -->
+      <view wx:if="{{item.trackingNo}}" class="tracking-info">
+        <text class="tracking-label">快递单号：</text>
+        <text class="tracking-no">{{item.trackingNo}}</text>
+      </view>
+
+      <!-- 订单操作 -->
+      <view class="order-actions">
+        <!-- 待付款状态 -->
+        <view wx:if="{{item.status === 'pending'}}" class="action-group">
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="cancel"
+            data-order-id="{{item.id}}"
+          >
+            取消订单
+          </button>
+          <button 
+            class="action-btn primary"
+            bindtap="onOrderAction"
+            data-action="pay"
+            data-order-id="{{item.id}}"
+          >
+            立即支付
+          </button>
+        </view>
+
+        <!-- 待发货状态 -->
+        <view wx:elif="{{item.status === 'paid'}}" class="action-group">
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="contact"
+            data-order-id="{{item.id}}"
+          >
+            联系客服
+          </button>
+        </view>
+
+        <!-- 待收货状态 -->
+        <view wx:elif="{{item.status === 'shipped'}}" class="action-group">
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="logistics"
+            data-order-id="{{item.id}}"
+          >
+            查看物流
+          </button>
+          <button 
+            class="action-btn primary"
+            bindtap="onOrderAction"
+            data-action="confirm"
+            data-order-id="{{item.id}}"
+          >
+            确认收货
+          </button>
+        </view>
+
+        <!-- 已完成状态 -->
+        <view wx:elif="{{item.status === 'received'}}" class="action-group">
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="delete"
+            data-order-id="{{item.id}}"
+          >
+            删除订单
+          </button>
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="review"
+            data-order-id="{{item.id}}"
+          >
+            评价
+          </button>
+          <button 
+            class="action-btn primary"
+            bindtap="onOrderAction"
+            data-action="contact"
+            data-order-id="{{item.id}}"
+          >
+            联系客服
+          </button>
+        </view>
+
+        <!-- 已取消状态 -->
+        <view wx:elif="{{item.status === 'cancelled'}}" class="action-group">
+          <button 
+            class="action-btn secondary"
+            bindtap="onOrderAction"
+            data-action="delete"
+            data-order-id="{{item.id}}"
+          >
+            删除订单
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
